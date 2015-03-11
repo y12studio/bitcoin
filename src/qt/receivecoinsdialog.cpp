@@ -1,25 +1,26 @@
-// Copyright (c) 2011-2014 The Bitcoin developers
-// Distributed under the MIT/X11 software license, see the accompanying
+// Copyright (c) 2011-2014 The Bitcoin Core developers
+// Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "receivecoinsdialog.h"
 #include "ui_receivecoinsdialog.h"
 
-#include "walletmodel.h"
-#include "bitcoinunits.h"
 #include "addressbookpage.h"
-#include "optionsmodel.h"
-#include "guiutil.h"
-#include "receiverequestdialog.h"
 #include "addresstablemodel.h"
+#include "bitcoinunits.h"
+#include "guiutil.h"
+#include "optionsmodel.h"
+#include "receiverequestdialog.h"
 #include "recentrequeststablemodel.h"
+#include "scicon.h"
+#include "walletmodel.h"
 
 #include <QAction>
 #include <QCursor>
-#include <QMessageBox>
-#include <QTextDocument>
-#include <QScrollBar>
 #include <QItemSelection>
+#include <QMessageBox>
+#include <QScrollBar>
+#include <QTextDocument>
 
 ReceiveCoinsDialog::ReceiveCoinsDialog(QWidget *parent) :
     QDialog(parent),
@@ -33,6 +34,11 @@ ReceiveCoinsDialog::ReceiveCoinsDialog(QWidget *parent) :
     ui->receiveButton->setIcon(QIcon());
     ui->showRequestButton->setIcon(QIcon());
     ui->removeRequestButton->setIcon(QIcon());
+#else
+    ui->clearButton->setIcon(SingleColorIcon(":/icons/remove"));
+    ui->receiveButton->setIcon(SingleColorIcon(":/icons/receiving_addresses"));
+    ui->showRequestButton->setIcon(SingleColorIcon(":/icons/edit"));
+    ui->removeRequestButton->setIcon(SingleColorIcon(":/icons/remove"));
 #endif
 
     // context menu actions
@@ -54,8 +60,6 @@ ReceiveCoinsDialog::ReceiveCoinsDialog(QWidget *parent) :
 
     connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clear()));
 }
-
-
 
 void ReceiveCoinsDialog::setModel(WalletModel *model)
 {
@@ -79,11 +83,9 @@ void ReceiveCoinsDialog::setModel(WalletModel *model)
         tableView->setColumnWidth(RecentRequestsTableModel::Label, LABEL_COLUMN_WIDTH);
 
         connect(tableView->selectionModel(),
-            SIGNAL(selectionChanged(QItemSelection, QItemSelection)),
-            this,
-            SLOT(on_recentRequestsView_selectionChanged(QItemSelection, QItemSelection)));
-
-        //(last 2 columns are set when the table geometry is ready) by the columnResizingFixer.
+            SIGNAL(selectionChanged(QItemSelection, QItemSelection)), this,
+            SLOT(recentRequestsView_selectionChanged(QItemSelection, QItemSelection)));
+        // Last 2 columns are set by the columnResizingFixer, when the table geometry is ready.
         columnResizingFixer = new GUIUtil::TableViewLastColumnResizingFixer(tableView, AMOUNT_MINIMUM_COLUMN_WIDTH, DATE_COLUMN_WIDTH);
     }
 }
@@ -169,8 +171,7 @@ void ReceiveCoinsDialog::on_recentRequestsView_doubleClicked(const QModelIndex &
     dialog->show();
 }
 
-void ReceiveCoinsDialog::on_recentRequestsView_selectionChanged(const QItemSelection &selected,
-                                                                const QItemSelection &deselected)
+void ReceiveCoinsDialog::recentRequestsView_selectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
     // Enable Show/Remove buttons only if anything is selected.
     bool enable = !ui->recentRequestsView->selectionModel()->selectedRows().isEmpty();
@@ -202,10 +203,12 @@ void ReceiveCoinsDialog::on_removeRequestButton_clicked()
     model->getRecentRequestsTableModel()->removeRows(firstIndex.row(), selection.length(), firstIndex.parent());
 }
 
-//We override the virtual resizeEvent of the QWidget to adjust tablet's column sizes as the table's width is proportional to the dialog's.
-void ReceiveCoinsDialog::resizeEvent(QResizeEvent* event) {
-  QWidget::resizeEvent(event);
-  columnResizingFixer->stretchColumnWidth(RecentRequestsTableModel::Message);
+// We override the virtual resizeEvent of the QWidget to adjust tables column
+// sizes as the tables width is proportional to the dialogs width.
+void ReceiveCoinsDialog::resizeEvent(QResizeEvent *event)
+{
+    QWidget::resizeEvent(event);
+    columnResizingFixer->stretchColumnWidth(RecentRequestsTableModel::Message);
 }
 
 void ReceiveCoinsDialog::keyPressEvent(QKeyEvent *event)

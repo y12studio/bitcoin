@@ -1,12 +1,14 @@
-// Copyright (c) 2011-2013 The Bitcoin developers
-// Distributed under the MIT/X11 software license, see the accompanying
+// Copyright (c) 2011-2013 The Bitcoin Core developers
+// Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef TRANSACTIONVIEW_H
-#define TRANSACTIONVIEW_H
+#ifndef BITCOIN_QT_TRANSACTIONVIEW_H
+#define BITCOIN_QT_TRANSACTIONVIEW_H
+
+#include "guiutil.h"
 
 #include <QWidget>
-#include "guiutil.h"
+#include <QKeyEvent>
 
 class TransactionFilterProxy;
 class WalletModel;
@@ -18,6 +20,7 @@ class QFrame;
 class QLineEdit;
 class QMenu;
 class QModelIndex;
+class QSignalMapper;
 class QTableView;
 QT_END_NAMESPACE
 
@@ -46,11 +49,12 @@ public:
     };
 
     enum ColumnWidths {
-      STATUS_COLUMN_WIDTH = 23,
-      DATE_COLUMN_WIDTH = 120,
-      TYPE_COLUMN_WIDTH = 120,
-      AMOUNT_MINIMUM_COLUMN_WIDTH = 120,
-      MINIMUM_COLUMN_WIDTH = 23
+        STATUS_COLUMN_WIDTH = 30,
+        WATCHONLY_COLUMN_WIDTH = 23,
+        DATE_COLUMN_WIDTH = 120,
+        TYPE_COLUMN_WIDTH = 113,
+        AMOUNT_MINIMUM_COLUMN_WIDTH = 120,
+        MINIMUM_COLUMN_WIDTH = 23
     };
 
 private:
@@ -60,10 +64,12 @@ private:
 
     QComboBox *dateWidget;
     QComboBox *typeWidget;
+    QComboBox *watchOnlyWidget;
     QLineEdit *addressWidget;
     QLineEdit *amountWidget;
 
     QMenu *contextMenu;
+    QSignalMapper *mapperThirdPartyTxUrls;
 
     QFrame *dateRangeWidget;
     QDateTimeEdit *dateFrom;
@@ -75,6 +81,8 @@ private:
 
     virtual void resizeEvent(QResizeEvent* event);
 
+    bool eventFilter(QObject *obj, QEvent *event);
+
 private slots:
     void contextualMenu(const QPoint &);
     void dateRangeChanged();
@@ -84,6 +92,8 @@ private slots:
     void copyLabel();
     void copyAmount();
     void copyTxID();
+    void openThirdPartyTxUrl(QString url);
+    void updateWatchOnlyColumn(bool fHaveWatchOnly);
 
 signals:
     void doubleClicked(const QModelIndex&);
@@ -94,6 +104,7 @@ signals:
 public slots:
     void chooseDate(int idx);
     void chooseType(int idx);
+    void chooseWatchonly(int idx);
     void changedPrefix(const QString &prefix);
     void changedAmount(const QString &amount);
     void exportClicked();
@@ -101,4 +112,4 @@ public slots:
 
 };
 
-#endif // TRANSACTIONVIEW_H
+#endif // BITCOIN_QT_TRANSACTIONVIEW_H
