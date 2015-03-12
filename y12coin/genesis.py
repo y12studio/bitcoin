@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
+# https://github.com/y12studio/GenesisH0
 # fastcoin/genesis at fastcoin · imharrywu/fastcoin
 # https://github.com/imharrywu/fastcoin/tree/fastcoin/genesis
-# python genesis.py -z "TestTimeStamp" -p "040184710fa689ad5023690c80f3a49c8f13f8d45b8c857fbcbc8bc4a8e4d3eb4b10f4d4604fa08dce601aaf0f470216fe1b51850b4acf21b179c45070ac7b03a9" -t 1317972665 -n 2084524493
+# python genesis.py -z "TestTimeStamp"
 #
 import hashlib, binascii, struct, array, os, time, sys, optparse
 from construct import *
+from bitcoin import *
 
 def main():
     options = get_args()
@@ -19,6 +20,9 @@ def main():
     bits,target = 0x1e0ffff0, 0x0ffff0 * 2**(8*(0x1e - 3))
     # bitcoin
     # bits, target = 0x1d00ffff, 0x00ffff * 2**(8*(0x1d - 3))
+    # bitcoin regtest
+    # 0x207fffff
+    # bits, target =  0x207fffff, 0x7fffff * 2**(8*(0x20 - 3))
     input_script  = create_input_script(options.timestamp)
     output_script = create_output_script(options.pubkey)
     tx = create_transaction(input_script, output_script,options)
@@ -170,6 +174,11 @@ def announce_found_genesis(genesis_hash, nonce):
     print "nonce: "        + str(nonce)
     print "genesis hash: " + genesis_hash.encode('hex_codec')
 
+def pubkey_default():
+    priv = random_key()
+    pub = privtopub(priv)
+    return pub
+
 def get_args():
     parser = optparse.OptionParser()
     parser.add_option("-t", "--time", dest="time", default=int(time.time()),
@@ -178,7 +187,7 @@ def get_args():
                    type="string", help="the pszTimestamp found in the coinbase of the genesisblock")
     parser.add_option("-n", "--nonce", dest="nonce", default=0,
                    type="int", help="the first value of the nonce that will be incremented when searching the genesis hash")
-    parser.add_option("-p", "--pubkey", dest="pubkey", default="04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f",
+    parser.add_option("-p", "--pubkey", dest="pubkey", default=pubkey_default(),
                    type="string", help="the pubkey found in the output script")
     parser.add_option("-v", "--value", dest="value", default=5000000000,
                    type="int", help="the value in coins for the output, full value (exp. in bitcoin 5000000000 - To get other coins value: Block Value * 100000000)")

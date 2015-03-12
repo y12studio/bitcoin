@@ -40,9 +40,9 @@ $ git branch
   master
 * y12coin2015
 $ sudo apt-get build-essential automake
-$ sudo apt-get install autoconf libtool pkg-config libboost-all-dev
+$ sudo apt-get install autoconf libtool pkg-config libboost-all-dev libdb5.1++-dev
 $ ./autogen.sh
-$ ./configure --without-miniupnpc --disable-ipv6 --disable-wallet
+$ ./configure --without-miniupnpc --disable-ipv6 --with-incompatible-bdb
 $ make
 $ sudo make install
 

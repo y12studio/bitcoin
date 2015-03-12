@@ -1,0 +1,15 @@
+alice:
+    build: .
+    command: bitcoind -regtest
+    links:
+        - bob
+    ports:
+        - "18444:18444"
+        - "18332:18332"
+
+bob:
+    build: .
+    command: bitcoind -regtest
+    ports:
+        - "19444:18444"
+        - "19332:18332"
