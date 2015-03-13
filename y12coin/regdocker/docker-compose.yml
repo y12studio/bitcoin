@@ -2,14 +2,26 @@ alice:
     build: .
     command: bitcoind -regtest
     links:
-        - bob
-    ports:
-        - "18444:18444"
-        - "18332:18332"
+        - seed1
+        - seed2
 
 bob:
     build: .
     command: bitcoind -regtest
-    ports:
-        - "19444:18444"
-        - "19332:18332"
+    links:
+        - seed1
+        - seed2
+
+nred:
+    build: nodeapp
+    command: static
+    links:
+        - bob
+
+seed1:
+    build: .
+    command: bitcoind -regtest -txindex
+
+seed2:
+    build: .
+    command: bitcoind -regtest -txindex

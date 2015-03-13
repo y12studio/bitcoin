@@ -8,6 +8,8 @@ RUN apt-get update
 RUN apt-get install -y bitcoind
 
 RUN mkdir ~/.bitcoin
-RUN echo "rpcuser=test\nrpcpassword=test\n" > ~/.bitcoin/bitcoin.conf
+RUN echo "rpcuser=test\nrpcpassword=test\naddnode=seed1\naddnode=seed2\n" > ~/.bitcoin/bitcoin.conf
 
 RUN echo "alias rt='bitcoin-cli -regtest'" >> ~/.bashrc
+
+EXPOSE 18332 18444
