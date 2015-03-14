@@ -17,6 +17,11 @@ bob:
     environment:
         BITCOIND_PARAM: -regtest
 
+bcp2p:
+    build: bcp2p
+    links:
+        - alice
+
 nred:
     build: nodeapp
     links:
