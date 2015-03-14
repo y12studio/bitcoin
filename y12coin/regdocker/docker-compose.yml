@@ -1,27 +1,34 @@
-alice:
-    build: .
-    command: bitcoind -regtest
-    links:
-        - seed1
-        - seed2
+bitcoind:
+    build: bitcoind
+    command: /bin/true
 
-bob:
-    build: .
-    command: bitcoind -regtest
+alice:
+    image: bitreg_bitcoind
     links:
-        - seed1
-        - seed2
+        - seeda
+        - seedb
+    environment:
+        BITCOIND_PARAM: -regtest
+bob:
+    image: bitreg_bitcoind
+    links:
+        - seeda
+        - seedb
+    environment:
+        BITCOIND_PARAM: -regtest
 
 nred:
     build: nodeapp
-    command: static
     links:
         - bob
 
-seed1:
-    build: .
-    command: bitcoind -regtest -txindex
+seeda:
+    image: bitreg_bitcoind
+    environment:
+        BITCOIND_PARAM: -regtest -txindex
 
-seed2:
-    build: .
-    command: bitcoind -regtest -txindex
+
+seedb:
+    image: bitreg_bitcoind
+    environment:
+        BITCOIND_PARAM: -regtest -txindex

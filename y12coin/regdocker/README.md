@@ -2,6 +2,116 @@
 
 [gak/docker-bitcoin-regtest](https://github.com/gak/docker-bitcoin-regtest)
 
+rewrite docker-cimpose.yml
+
+```
+$ source alias.sh
+$ dc build
+$ dc up -d
+Creating bitreg_seeda_1...
+Creating bitreg_seedb_1...
+Creating bitreg_bob_1...
+Creating bitreg_nred_1...
+Creating bitreg_alice_1...
+Creating bitreg_bitcoind_1...
+$ dc ps
+      Name             Command      State           Ports
+-----------------------------------------------------------------
+bitreg_alice_1      /sbin/my_init   Up       18332/tcp, 18444/tcp
+bitreg_bitcoind_1   /bin/true       Exit 0
+bitreg_bob_1        /sbin/my_init   Up       18332/tcp, 18444/tcp
+bitreg_nred_1       static          Up       8080/tcp
+bitreg_seeda_1      /sbin/my_init   Up       18332/tcp, 18444/tcp
+bitreg_seedb_1      /sbin/my_init   Up       18332/tcp, 18444/tcp
+
+```
+
+phusion/baseimage-docker runit test Sat Mar 14 16:48:52 CST 2015
+
+```
+$ source alias.sh
+$ dc build
+$ dc up -d
+
+$ alicesh
+root@59c7ac433eb5:/# rt getnewaddress
+mgbsVjpqzyMo5qJLyRRoT36CJ3xi9g2tWp
+
+$ bobsh
+
+root@260555c43d16:/# ps -auwwwx
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.2  28812  8124 ?        Ss   08:31   0:00 /usr/bin/python3 -u /sbin/my_init
+root        98  0.0  0.0    188    40 ?        S    08:31   0:00 /usr/bin/runsvdir -P /etc/service
+root        99  0.0  0.0    168     4 ?        Ss   08:31   0:00 runsv bitcoind
+root       100  0.0  0.0    168     4 ?        Ss   08:31   0:00 runsv syslog-ng
+root       101  0.0  0.0    168     4 ?        Ss   08:31   0:00 runsv cron
+root       102  0.0  0.0    168     4 ?        Ss   08:31   0:00 runsv syslog-forwarder
+root       103  0.0  0.0   7472   616 ?        S    08:31   0:00 tail -f -n 0 /var/log/syslog
+root       104  0.0  0.1  65748  4304 ?        S    08:31   0:00 syslog-ng -F -p /var/run/syslog-ng.pid --no-caps
+root       105  0.0  0.0  26744  1116 ?        S    08:31   0:00 /usr/sbin/cron -f
+root       106  0.0  0.0  21108  1560 ?        S    08:31   0:00 /bin/bash ./run
+root       110  0.1  0.7 713520 31860 ?        SLl  08:31   0:00 /usr/bin/bitcoind -conf=/btc/bitcoin.conf -datadir=/btc/data -regtest
+root       167  0.0  0.0  18164  1904 ?        S    08:45   0:00 bash
+root       183  0.0  0.0  15564  1148 ?        R+   08:45   0:00 ps -auwwwx
+
+# rt setgenerate true 101
+# rt setgenerate true 10
+# rt getinfo
+{
+    "version" : 100000,
+    "protocolversion" : 70002,
+    "walletversion" : 60000,
+    "balance" : 550.00000000,
+    "blocks" : 111,
+    "timeoffset" : 0,
+    "connections" : 2,
+    "proxy" : "",
+    "difficulty" : 0.00000000,
+    "testnet" : false,
+    "keypoololdest" : 1426321874,
+    "keypoolsize" : 101,
+    "paytxfee" : 0.00000000,
+    "relayfee" : 0.00001000,
+    "errors" : ""
+}
+
+
+$ seedash
+
+root@7c78b325349c:/# ps -auwwwx
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.1  28812  8080 ?        Ss   08:31   0:00 /usr/bin/python3 -u /sbin/my_init
+root        95  0.0  0.0    188    32 ?        S    08:31   0:00 /usr/bin/runsvdir -P /etc/service
+root        96  0.0  0.0    168     4 ?        Ss   08:31   0:00 runsv bitcoind
+root        97  0.0  0.0    168     4 ?        Ss   08:31   0:00 runsv syslog-ng
+root        98  0.0  0.0    168     4 ?        Ss   08:31   0:00 runsv cron
+root        99  0.0  0.0    168     4 ?        Ss   08:31   0:00 runsv syslog-forwarder
+root       100  0.0  0.0  26744  1112 ?        S    08:31   0:00 /usr/sbin/cron -f
+root       101  0.0  0.1  65740  4308 ?        S    08:31   0:00 syslog-ng -F -p /var/run/syslog-ng.pid --no-caps
+root       102  0.0  0.0  21080  1536 ?        S    08:31   0:00 /bin/bash ./run
+root       103  0.0  0.0   7472   612 ?        S    08:31   0:00 tail -f -n 0 /var/log/syslog
+root       105  0.1  0.7 717744 29772 ?        SLl  08:31   0:00 /usr/bin/bitcoind -conf=/btc/bitcoin.conf -datadir=/btc/data -regtest -txindex
+root       132  0.0  0.0  18136  1980 ?        S    08:39   0:00 bash
+root       152  0.0  0.0  15564  1148 ?        R+   08:44   0:00 ps -auwwwx
+
+# ls /btc/data/regtest/
+bitcoind.pid  chainstate  db.log     peers.dat
+blocks        database    debug.log  wallet.dat
+
+root@7c78b325349c:/# tail /btc/data/regtest/debug.log
+2015-03-14 08:38:39 UpdateTip: new best=0dd34494c094245063f0b1ab1d9e60c5f42f32aafa07b6ad74ee2e915fec381e  height=103  log2_work=7.7004397  tx=104  date=2015-03-14 08:38:38 progress=1.000000  cache=103
+2015-03-14 08:38:39 UpdateTip: new best=5a396331fdc72ebce13e09ea942e32dbaebdd50f6bd2b30555d5a516931485fd  height=104  log2_work=7.7142455  tx=105  date=2015-03-14 08:38:38 progress=1.000000  cache=104
+2015-03-14 08:38:39 UpdateTip: new best=222a9c8e9508d89a53cfb18afdd8c358c7aa24e47359fda9841d7f89839b8a6b  height=105  log2_work=7.7279205  tx=106  date=2015-03-14 08:38:38 progress=1.000000  cache=105
+2015-03-14 08:38:39 UpdateTip: new best=26b2e80af7c55b58e8eba6a5a1d68c53d8b634af5a4518196eea8ee762ab6c2c  height=106  log2_work=7.741467  tx=107  date=2015-03-14 08:38:38 progress=1.000000  cache=106
+2015-03-14 08:38:39 UpdateTip: new best=02db35082dde7eb0e1aaf899f5e886d1feeefb9ca3045d3acc674df6835d63e9  height=107  log2_work=7.7548875  tx=108  date=2015-03-14 08:38:38 progress=1.000000  cache=107
+2015-03-14 08:38:39 UpdateTip: new best=6e915443b9ac56f83fa91b720730315cf1ee2e1d148b74ad297027d05048a223  height=108  log2_work=7.7681843  tx=109  date=2015-03-14 08:38:39 progress=1.000000  cache=108
+2015-03-14 08:38:39 UpdateTip: new best=2bd8f8431ab4fc27b6d5f0504461c2f4a1b7ea47cbaf69bd919f5c60c8add753  height=109  log2_work=7.7813597  tx=110  date=2015-03-14 08:38:39 progress=1.000000  cache=109
+2015-03-14 08:38:39 UpdateTip: new best=078f2a8d3aa909247392cbd571ad753ef47f500bf5536a2bbfefce68ba168824  height=110  log2_work=7.7944159  tx=111  date=2015-03-14 08:38:39 progress=1.000000  cache=110
+2015-03-14 08:38:39 UpdateTip: new best=71c9bad23f1909318b7d388d099eafa6eab1594750ebda37b10eb2f74f3e0455  height=111  log2_work=7.8073549  tx=112  date=2015-03-14 08:38:39 progress=1.000000  cache=111
+2015-03-14 08:45:53 ResendWalletTransactions()
+
+```
 
 bitcore nodejs test
 ```
