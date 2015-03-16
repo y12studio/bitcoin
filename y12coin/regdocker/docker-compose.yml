@@ -14,6 +14,8 @@ alice:
         - seedb
     environment:
         BITCOIND_PARAM: -regtest
+        BITCOIN_CONF: addnode=seeda\naddnode=seedb
+
 bob:
     image: bitreg_bitcoind
     links:
@@ -21,18 +23,21 @@ bob:
         - seedb
     environment:
         BITCOIND_PARAM: -regtest
+        BITCOIN_CONF: addnode=seeda\naddnode=seedb
 
 bcp2p:
     build: bcp2p
     links:
         - alice
+    environment:
+        LINK_HOST: alice 
 
 bcnode:
     build: bcnode
     links:
         - seeda
     environment:
-        BITCOIND_PARAM: -regtest -txindex
+        BITCOIND_PARAM: -regtest -txindex -addnode=seeda
 
 
 seeda:

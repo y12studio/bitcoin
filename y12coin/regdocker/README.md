@@ -8,8 +8,18 @@ rewrite
 $ source alias.sh
 $ dc build bitcoind && dc build bitcoindbe
 $ dc build
-
-
+$ dc up -d
+$ dc ps
+Name              Command      State           Ports
+-------------------------------------------------------------------
+bitreg_alice_1        /sbin/my_init   Up       18332/tcp, 18444/tcp
+bitreg_bcnode_1       /sbin/my_init   Up       18332/tcp, 18444/tcp
+bitreg_bcp2p_1        /sbin/my_init   Up
+bitreg_bitcoind_1     /bin/true       Exit 0
+bitreg_bitcoindbe_1   /bin/true       Exit 0
+bitreg_bob_1          /sbin/my_init   Up       18332/tcp, 18444/tcp
+bitreg_seeda_1        /sbin/my_init   Up       18332/tcp, 18444/tcp
+bitreg_seedb_1        /sbin/my_init   Up       18332/tcp, 18444/tcp
 ```
 
 

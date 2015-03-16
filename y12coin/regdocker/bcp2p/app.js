@@ -12,7 +12,7 @@ Networks.add({
   xpubkey: 0x043587cf,
   xprivkey: 0x04358394,
   networkMagic: 0xfabfb5da,
-  port: 18333,
+  port: 18332,
   dnsSeeds: [
   ],
 });
@@ -22,7 +22,9 @@ var bcp2p = require('bitcore-p2p');
 var Peer = bcp2p.Peer;
 var Messages = bcp2p.Messages;
 
-var peer = new Peer('alice',18444,regnet);
+linkhost = process.env.LINK_HOST;
+
+var peer = new Peer(linkhost,18444,regnet);
 
 peer.on('ready', function() {
   // peer info
