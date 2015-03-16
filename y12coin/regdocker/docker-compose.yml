@@ -10,6 +10,8 @@ bitcoindbe:
 loges:
     build: loges
     command: logstash agent -f /loges/bitcoin-search.conf
+    ports:
+        - "9200:9200"
 
 alice:
     image: bitreg_bitcoind

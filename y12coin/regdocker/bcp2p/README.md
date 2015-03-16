@@ -1,3 +1,39 @@
+
+Mon Mar 16 21:35:15 CST 2015
+
+[Beaver provides an lightweight method for shipping local log files to Logstash.](http://beaver.readthedocs.org/en/latest/user/intro.html)
+
+[Bunyan is a simple and fast JSON logging library for node.js services:](https://github.com/trentm/node-bunyan)
+
+```
+root@8536ee0e5606:/bcp2p# node app.js
+
+// alicesh rt setgenerate ture 1
+
+root@8536ee0e5606:/bcp2p# cat /var/log/bcp2p.log
+
+{"name":"bcp2p","hostname":"8536ee0e5606","pid":129,"level":30,"type":2,"hash":"e953782d3c424d0d3521b8b0bd88e658fd75e7c23151140d64ee44217b05ea32","typeName":"BLOCK","msg":"","time":"2015-03-16T14:31:08.239Z","v":0}
+{"name":"bcp2p","hostname":"8536ee0e5606","pid":129,"level":30,"type":2,"hash":"f6e03449aeea17abf1787eec6a95f588809d5aa1b66dc4871b2230556abadb4e","typeName":"BLOCK","msg":"","time":"2015-03-16T14:31:10.046Z","v":0}
+{"name":"bcp2p","hostname":"8536ee0e5606","pid":129,"level":30,"type":2,"hash":"d794b4259692582bbd0c744281be7ac46732f221f0badf11ae314d7a9ce62811","typeName":"BLOCK","msg":"","time":"2015-03-16T14:31:11.554Z","v":0}
+
+
+root@8536ee0e5606:/bcp2p# beaver -c beaver.conf -t stdout
+[2015-03-16 14:49:44,445] INFO    Starting worker...
+[2015-03-16 14:49:44,446] INFO    Working...
+[2015-03-16 14:49:44,450] INFO    [44g7f9] - watching logfile /var/log/auth.log
+[2015-03-16 14:49:44,450] INFO    [44g74d] - watching logfile /var/log/bcp2p.log
+[2015-03-16 14:49:44,451] INFO    [44g7fc] - watching logfile /var/log/cron.log
+[2015-03-16 14:49:44,451] INFO    [44g7ad] - watching logfile /var/log/dpkg.log
+[2015-03-16 14:49:44,453] INFO    [44g7af] - watching logfile /var/log/alternatives.log
+[2015-03-16 14:49:44,453] INFO    [44g7b5] - watching logfile /var/log/bootstrap.log
+[2015-03-16 14:49:44,459] INFO    Starting queue consumer
+
+{"tags": [], "@version": 1, "@timestamp": "2015-03-16T14:50:08.519Z", "host": "8536ee0e5606", "file": "/var/log/bcp2p.log", "message": "{\"name\":\"bcp2p\",\"hostname\":\"8536ee0e5606\",\"pid\":170,\"level\":30,\"type\":2,\"hash\":\"d5cefa715fb4d86af0b715dccf8f9391c0f16aaa7ef953a909cc0bac185fc91f\",\"typeName\":\"BLOCK\",\"msg\":\"\",\"time\":\"2015-03-16T14:50:08.454Z\",\"v\":0}", "type": "file"}
+
+```
+
+bcp2p test
+
 ```
 $ dc up -d
 Recreating bitreg_seeda_1...
