@@ -7,6 +7,10 @@ bitcoindbe:
     build: bitcoindbe
     command: /bin/true
 
+loges:
+    build: loges
+    command: logstash agent -f /loges/bitcoin-search.conf
+
 alice:
     image: bitreg_bitcoind
     links:
@@ -30,7 +34,7 @@ bcp2p:
     links:
         - alice
     environment:
-        LINK_HOST: alice 
+        LINK_HOST: alice
 
 bcnode:
     build: bcnode
