@@ -2,6 +2,17 @@
 
 [gak/docker-bitcoin-regtest](https://github.com/gak/docker-bitcoin-regtest)
 
+rewrite
+
+```
+$ source alias.sh
+$ dc build bitcoind && dc build bitcoindbe
+$ dc build
+
+
+```
+
+
 rewrite docker-cimpose.yml
 
 ```

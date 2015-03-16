@@ -1,8 +1,9 @@
 // bitcore-p2p/bitcoind.js at master · bitpay/bitcore-p2p
 // https://github.com/bitpay/bitcore-p2p/blob/master/integration/bitcoind.js
 var bitcore = require('bitcore');
+var Networks = bitcore.Networks;
 //var network = new bitcore.Network();
-bitcore.Networks.add({
+Networks.add({
   name: 'regnet',
   alias: 'regnet',
   pubkeyhash: 0x6f,
@@ -15,8 +16,8 @@ bitcore.Networks.add({
   dnsSeeds: [
   ],
 });
-var regnet = bitcore.Networks.get('regnet');
 
+var regnet = Networks.get('regnet');
 var bcp2p = require('bitcore-p2p');
 var Peer = bcp2p.Peer;
 var Messages = bcp2p.Messages;

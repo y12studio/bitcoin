@@ -1,6 +1,6 @@
 alias alicesh='docker exec -i -t bitreg_alice_1 bash'
 alias bobsh='docker exec -i -t bitreg_bob_1 bash'
 alias bcp2psh='docker exec -i -t bitreg_bcp2p_1 bash'
-alias nredsh='docker exec -i -t bitreg_nred_1 bash'
+alias bcnodesh='docker exec -i -t bitreg_bcnode_1 bash'
 alias seedash='docker exec -i -t bitreg_seeda_1 bash'
 alias dc='docker-compose -p bitreg'

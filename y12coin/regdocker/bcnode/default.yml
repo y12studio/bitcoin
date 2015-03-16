@@ -1,0 +1,12 @@
+BitcoreNode:
+  NetworkMonitor:
+    network: regnet
+    host: seeda
+    port: 18444
+LevelUp: ./db
+RPC:
+  username: user
+  password: pass
+  protocol: http
+  host: 127.0.0.1
+  port: 18332

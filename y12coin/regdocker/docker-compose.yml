@@ -2,6 +2,11 @@ bitcoind:
     build: bitcoind
     command: /bin/true
 
+# bitcoind with build-essential
+bitcoindbe:
+    build: bitcoindbe
+    command: /bin/true
+
 alice:
     image: bitreg_bitcoind
     links:
@@ -22,10 +27,13 @@ bcp2p:
     links:
         - alice
 
-nred:
-    build: nodeapp
+bcnode:
+    build: bcnode
     links:
-        - bob
+        - seeda
+    environment:
+        BITCOIND_PARAM: -regtest -txindex
+
 
 seeda:
     image: bitreg_bitcoind
