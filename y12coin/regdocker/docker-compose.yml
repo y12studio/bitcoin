@@ -17,7 +17,17 @@ loges:
     ports:
         - "9200:9200"
 
+kibana4:
+    image: bobrik/kibana4
+    links:
+        - loges
+    environment:
+        KIBANA_ES_URL: http://loges:9200
+    ports:
+        - "9280:5601"
+
 alice:
+    hostname: alice
     image: bitreg_bitcoind
     links:
         - seeda
@@ -27,6 +37,7 @@ alice:
         BITCOIN_CONF: addnode=seeda:12333\naddnode=seedb:12333\nrpcallowip=172.17.0.0/24\n
 
 bob:
+    hostname: bob
     image: bitreg_bitcoind
     links:
         - seeda
@@ -36,6 +47,7 @@ bob:
         BITCOIN_CONF: addnode=seeda:12333\naddnode=seedb:12333\nrpcallowip=172.17.0.0/24\n
 
 miner:
+    hostname: miner
     image: bitreg_bitcoind
     links:
         - seeda
@@ -44,6 +56,7 @@ miner:
         BITCOIN_CONF: addnode=seeda:12333\nrpcallowip=172.17.0.0/24\n
 
 gcmt:
+    hostname: gcmt
     build: gcmt
     links:
         - alice
@@ -51,14 +64,17 @@ gcmt:
         - miner
 
 bcp2p:
+    hostname: bcp2p
     build: bcp2p
     links:
         - alice
+        - loges
     environment:
         LINK_HOST: alice
         LINK_PORT: 12333
 
 bcnode:
+    hostname: bcnode
     build: bcnode
     links:
         - seeda

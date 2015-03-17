@@ -34,6 +34,61 @@ nSubsidyHalvingInterval = 150;
 
 ```
 
+[elasticsearch Repository | Docker Hub Registry - Repositories of Docker Images](https://registry.hub.docker.com/_/elasticsearch/)
+
+
+[bobrik/kibana4 Repository | Docker Hub Registry - Repositories of Docker Images](https://registry.hub.docker.com/u/bobrik/kibana4/)
+
+Tue Mar 17 18:34:52 CST 2015
+
+```
+$ dc up -d
+$ dc ps
+      Name             Command             State              Ports
+-------------------------------------------------------------------------
+bitreg_alice_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_bcnode_1    /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_bcp2p_1     /sbin/my_init      Up
+bitreg_bitcoind_   /bin/true          Exit 0
+1
+bitreg_bitcoindb   /bin/true          Exit 0
+e_1
+bitreg_bob_1       /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_gcmt_1      /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_kibana4_1   /bin/sh -c         Up                 0.0.0.0:9280->56
+                   /run.sh                               01/tcp
+bitreg_loges_1     logstash agent     Up                 8333/tcp, 0.0.0.
+                   -f /loges/b ...                       0:9200->9200/tcp
+                                                         , 9300/tcp
+bitreg_miner_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_rbase_1     /bin/true          Exit 0
+bitreg_seeda_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_seedb_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+
+root@gcmt:/#
+minerrt setgenerate true 101
+minerrt sendtoaddress mpTbjYa54fJetgYCwAkANdsnqBeV9axcoS 1
+minerrt setgenerate true 1
+minerrt sendtoaddress mpTbjYa54fJetgYCwAkANdsnqBeV9axcoS 2
+minerrt setgenerate true 1
+
+
+browser http://docker_host:9280/
+
+Error: This version of Kibana requires Elasticsearch 1.4.4 or higher on all nodes. I found the following incompatible nodes in your cluster:
+
+Elasticsearch v1.1.1 @ inet[/172.17.1.37:9200] (172.17.1.37)
+
+```
+
+
 port=12333, rpcport=12444
 
 Tue Mar 17 09:04:51 CST 2015

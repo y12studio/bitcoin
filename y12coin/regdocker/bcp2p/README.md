@@ -1,9 +1,49 @@
 
-Mon Mar 16 21:35:15 CST 2015
+
 
 [Beaver provides an lightweight method for shipping local log files to Logstash.](http://beaver.readthedocs.org/en/latest/user/intro.html)
 
 [Bunyan is a simple and fast JSON logging library for node.js services:](https://github.com/trentm/node-bunyan)
+
+Tue Mar 17 18:23:50 CST 2015
+
+run bcp2p2/beaver from /etc/service/xxd/run
+
+Tue Mar 17 15:23:39 CST 2015
+
+```
+// gcmtsh
+// minerrt setgenerate true 101
+// minerrt sendtoaddress mpTbjYa54fJetgYCwAkANdsnqBeV9axcoS 1
+// minerrt setgenerate true 1
+// minerrt sendtoaddress mpTbjYa54fJetgYCwAkANdsnqBeV9axcoS 2
+// minerrt setgenerate true 1
+
+$ bcp2psh
+root@764658ab2d8d:/bcp2p# node app.js &
+70002 '/Satoshi:0.10.0/' 0
+
+root@764658ab2d8d:/bcp2p# cat /var/log/bcp2p.log
+
+root@764658ab2d8d:/bcp2p# beaver -c beaver.conf -t stdout
+
+root@764658ab2d8d:/bcp2p# beaver -c beaver.conf -t tcp
+[2015-03-17 07:29:30,061] INFO    Starting worker...
+[2015-03-17 07:29:30,062] INFO    Working...
+[2015-03-17 07:29:30,068] INFO    [4bg3a1] - watching logfile /var/log/bcp2p.log
+[2015-03-17 07:29:30,068] INFO    Starting queue consumer
+[2015-03-17 07:29:30,096] INFO    Connected
+
+// minerrt sendtoaddress mpTbjYa54fJetgYCwAkANdsnqBeV9axcoS 1
+// minerrt setgenerate true 1
+// minerrt sendtoaddress mpTbjYa54fJetgYCwAkANdsnqBeV9axcoS 2
+// minerrt setgenerate true 1
+
+// browser http://docker_host_ip:9200/_search?pretty
+```
+
+
+Mon Mar 16 21:35:15 CST 2015
 
 ```
 root@8536ee0e5606:/bcp2p# node app.js

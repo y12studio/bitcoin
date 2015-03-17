@@ -42,6 +42,8 @@ peer.on('disconnect', function() {
 
 peer.once('block', function(message) {
     console.log(message);
+    message.type = 'peerblock'
+    log.info(message);
 });
 // handle events
 peer.on('inv', function(msg) {
@@ -50,9 +52,10 @@ peer.on('inv', function(msg) {
     // hash is Buffer type. convert to hex format.
     var inv0 = msg.inventory[0];
     var invr = {
-            type: inv0.type,
+            invtype: inv0.type,
             hash: inv0.hash.toString('hex'),
-            typeName: inv0.typeName
+            typeName: inv0.typeName,
+            type:'peerinv'
         }
     log.info(invr);
     var message = new Messages.GetData(msg.inventory);
@@ -61,7 +64,9 @@ peer.on('inv', function(msg) {
 
 peer.on('tx', function(message) {
     // message.transaction
-    console.log(message)
+    console.log(message);
+    message.type = 'peertx';
+    log.info(message);
 });
 
 peer.connect();
