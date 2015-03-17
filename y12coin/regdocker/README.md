@@ -36,6 +36,46 @@ nSubsidyHalvingInterval = 150;
 
 [elasticsearch Repository | Docker Hub Registry - Repositories of Docker Images](https://registry.hub.docker.com/_/elasticsearch/)
 
+Tue Mar 17 21:33:22 CST 2015
+
+```
+$ source alias.sh
+$ dc up -d
+$ dc logs
+
+// browser http://docker_host:9200 and 9280
+
+$ dc ps
+      Name             Command             State              Ports
+-------------------------------------------------------------------------
+bitreg_alice_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_bcnode_1    /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_bcp2p_1     /sbin/my_init      Up
+bitreg_bitcoind_   /bin/true          Exit 0
+1
+bitreg_bitcoindb   /bin/true          Exit 0
+e_1
+bitreg_bob_1       /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_es_1        elasticsearch      Up                 0.0.0.0:9200->92
+                                                         00/tcp, 9300/tcp
+bitreg_gcmt_1      /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_kibana4_1   /bin/sh -c         Up                 0.0.0.0:9280->56
+                   /run.sh                               01/tcp
+bitreg_logsa_1     logstash agent     Up                 8333/tcp,
+                   -f /loges/b ...                       9200/tcp,
+                                                         9300/tcp
+bitreg_miner_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_rbase_1     /bin/true          Exit 0
+bitreg_seeda_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_seedb_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+```
 
 [bobrik/kibana4 Repository | Docker Hub Registry - Repositories of Docker Images](https://registry.hub.docker.com/u/bobrik/kibana4/)
 

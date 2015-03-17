@@ -11,18 +11,23 @@ bitcoindbe:
     build: bitcoindbe
     command: /bin/true
 
-loges:
-    build: loges
+logsa:
+    build: logsa
     command: logstash agent -f /loges/bitcoin-search.conf
+    links:
+        - es
+
+es:
+    image: elasticsearch:1.4.4
     ports:
         - "9200:9200"
 
 kibana4:
     image: bobrik/kibana4
     links:
-        - loges
+        - es
     environment:
-        KIBANA_ES_URL: http://loges:9200
+        KIBANA_ES_URL: http://es:9200
     ports:
         - "9280:5601"
 
@@ -68,7 +73,7 @@ bcp2p:
     build: bcp2p
     links:
         - alice
-        - loges
+        - logsa
     environment:
         LINK_HOST: alice
         LINK_PORT: 12333
