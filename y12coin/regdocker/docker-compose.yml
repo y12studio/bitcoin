@@ -1,3 +1,7 @@
+rbase:
+    build: rbase
+    command: /bin/true
+
 bitcoind:
     build: bitcoind
     command: /bin/true
@@ -20,7 +24,7 @@ alice:
         - seedb
     environment:
         BITCOIND_PARAM: -regtest
-        BITCOIN_CONF: addnode=seeda\naddnode=seedb
+        BITCOIN_CONF: addnode=seeda:12333\naddnode=seedb:12333\nrpcallowip=172.17.0.0/24\n
 
 bob:
     image: bitreg_bitcoind
@@ -29,7 +33,22 @@ bob:
         - seedb
     environment:
         BITCOIND_PARAM: -regtest
-        BITCOIN_CONF: addnode=seeda\naddnode=seedb
+        BITCOIN_CONF: addnode=seeda:12333\naddnode=seedb:12333\nrpcallowip=172.17.0.0/24\n
+
+miner:
+    image: bitreg_bitcoind
+    links:
+        - seeda
+    environment:
+        BITCOIND_PARAM: -regtest
+        BITCOIN_CONF: addnode=seeda:12333\nrpcallowip=172.17.0.0/24\n
+
+gcmt:
+    build: gcmt
+    links:
+        - alice
+        - bob
+        - miner
 
 bcp2p:
     build: bcp2p
@@ -37,22 +56,22 @@ bcp2p:
         - alice
     environment:
         LINK_HOST: alice
+        LINK_PORT: 12333
 
 bcnode:
     build: bcnode
     links:
         - seeda
     environment:
-        BITCOIND_PARAM: -regtest -txindex -addnode=seeda
+        BITCOIND_PARAM: -regtest -txindex -addnode=seeda:12333
 
 
 seeda:
     image: bitreg_bitcoind
     environment:
-        BITCOIND_PARAM: -regtest -txindex
-
+        BITCOIND_PARAM: -regtest -txindex -disablewallet
 
 seedb:
     image: bitreg_bitcoind
     environment:
-        BITCOIND_PARAM: -regtest -txindex
+        BITCOIND_PARAM: -regtest -txindex -disablewallet

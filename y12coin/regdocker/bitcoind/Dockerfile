@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install -y bitcoind
 
 RUN mkdir -p /btc/data \
-    && echo "rpcuser=user\nrpcpassword=pass\n" > /btc/bitcoin.conf \
+    && echo "rpcuser=user\nrpcpassword=pass\nport=12333\nrpcport=12332\n" > /btc/bitcoin.conf \
     && echo "alias rt='bitcoin-cli -conf=/btc/bitcoin.conf -regtest'" >> ~/.bashrc
 
 RUN mkdir /etc/service/bitcoind \
@@ -18,5 +18,5 @@ RUN mkdir /etc/service/bitcoind \
 # disable sshd
 RUN rm -rf /etc/service/sshd
 
-EXPOSE 18332 18444
+EXPOSE 12333 12332
 CMD ["/sbin/my_init"]

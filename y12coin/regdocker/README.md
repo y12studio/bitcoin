@@ -2,6 +2,68 @@
 
 [gak/docker-bitcoin-regtest](https://github.com/gak/docker-bitcoin-regtest)
 
+TODO
+
+```
+main.cpp
+
+CAmount GetBlockValue(int nHeight, const CAmount& nFees)
+{
+    CAmount nSubsidy = 50 * COIN;
+    int halvings = nHeight / Params().SubsidyHalvingInterval();
+
+    // Force block reward to zero when right shift is undefined.
+    if (halvings >= 64)
+        return nFees;
+
+    // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
+    nSubsidy >>= halvings;
+
+    return nSubsidy + nFees;
+}
+
+chainparams.cpp
+mainnet
+nSubsidyHalvingInterval = 210000;
+
+50(1/(1-0.5))*210000=21M
+
+regtest
+nSubsidyHalvingInterval = 150;
+50(1/(1-0.5))*150=15000
+
+```
+
+port=12333, rpcport=12444
+
+Tue Mar 17 09:04:51 CST 2015
+
+```
+$ dc ps
+      Name             Command             State              Ports
+-------------------------------------------------------------------------
+bitreg_alice_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_bcnode_1    /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_bcp2p_1     /sbin/my_init      Up
+bitreg_bitcoind_   /bin/true          Exit 0
+1
+bitreg_bitcoindb   /bin/true          Exit 0
+e_1
+bitreg_bob_1       /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_gcmt_1      /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_loges_1     logstash agent     Up                 8333/tcp, 0.0.0.
+                   -f /loges/b ...                       0:9200->9200/tcp
+                                                         , 9300/tcp
+bitreg_rbase_1     /bin/true          Exit 0
+bitreg_seeda_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+bitreg_seedb_1     /sbin/my_init      Up                 12332/tcp,
+                                                         12333/tcp
+```
 
 logstash added
 
