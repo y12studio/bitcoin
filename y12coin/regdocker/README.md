@@ -4,36 +4,6 @@
 
 TODO
 
-```
-main.cpp
-
-CAmount GetBlockValue(int nHeight, const CAmount& nFees)
-{
-    CAmount nSubsidy = 50 * COIN;
-    int halvings = nHeight / Params().SubsidyHalvingInterval();
-
-    // Force block reward to zero when right shift is undefined.
-    if (halvings >= 64)
-        return nFees;
-
-    // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
-    nSubsidy >>= halvings;
-
-    return nSubsidy + nFees;
-}
-
-chainparams.cpp
-mainnet
-nSubsidyHalvingInterval = 210000;
-
-50(1/(1-0.5))*210000=21M
-
-regtest
-nSubsidyHalvingInterval = 150;
-50(1/(1-0.5))*150=15000
-
-```
-
 [elasticsearch Repository | Docker Hub Registry - Repositories of Docker Images](https://registry.hub.docker.com/_/elasticsearch/)
 
 Tue Mar 17 21:33:22 CST 2015
