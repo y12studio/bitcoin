@@ -1,6 +1,5 @@
-alice:
-    hostname: alice
-    image: y12docker/butcd
-    environment:
-        BITCOIND_PARAM: -regtest
-        BITCOIN_CONF: addnode=seeda:12333\naddnode=seedb:12333\nrpcallowip=172.17.0.0/24\n
+rbase:
+    build: rbase
+
+rmake:
+    build: rmake

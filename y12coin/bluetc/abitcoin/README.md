@@ -1,7 +1,5 @@
 Thu Mar 19 12:48:35 CST 2015
 
-[aports/testing/bitcoin at master · alpinelinux/aports](https://github.com/alpinelinux/aports/tree/master/testing/bitcoin)
-
 ```
 $ docker build -t y12docker/foo .
 
