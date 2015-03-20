@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/bin/bitcoind -regtest -conf=/btc/bitcoin.conf -datadir=/btc/data $BITCOIND_PARAM

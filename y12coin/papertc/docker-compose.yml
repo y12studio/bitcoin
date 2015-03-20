@@ -1,0 +1,28 @@
+patcd:
+    build: patcd
+    command: /bin/true
+
+alice:
+    image: papertc_patcd
+    links:
+        - seeda
+        - seedb
+    environment:
+        BITCOIND_PARAM: -addnode=seeda:12333 -addnode=seedb:12333
+
+bob:
+    image: papertc_patcd
+    links:
+        - seeda
+    environment:
+        BITCOIND_PARAM: -addnode=seeda:12333
+
+seeda:
+    image: papertc_patcd
+    environment:
+        BITCOIND_PARAM: -txindex -disablewallet
+
+seedb:
+    image: papertc_patcd
+    environment:
+        BITCOIND_PARAM: -txindex -disablewallet
