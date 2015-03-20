@@ -10,9 +10,9 @@ set -x
 SCRIPTPATH=$( cd "$(dirname "$0")" ; pwd -P )
 
 # download bitcoin src v0.10.0
-wget -qO- https://github.com/bitcoin/bitcoin/archive/v0.10.0.tar.gz | tar xvz -C ~/tmp
+# wget -qO- https://github.com/bitcoin/bitcoin/archive/v0.10.0.tar.gz | tar xvz -C ~/tmp
 rm -rf ~/tmp/bitcoin
-mv ~/tmp/bitcoin-* ~/tmp/bitcoin
+cp -r ~/tmp/bitcoin-* ~/tmp/bitcoin
 cd ~/tmp/bitcoin
 ./autogen.sh
 CONFIGFLAGS="-disable-tests --without-gui --enable-upnp-default --disable-ccache --disable-maintainer-mode --disable-dependency-tracking"
