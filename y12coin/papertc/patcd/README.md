@@ -1,3 +1,106 @@
+Sat Mar 21 14:45:34 CST 2015
+
+new patch file
+
+```
+$ source alias.sh
+$ cd bsrc
+$ vi/nano/echo....
+modified:   src/bitcoin-cli.cpp
+modified:   src/bitcoin-tx.cpp
+modified:   src/bitcoind.cpp
+modified:   src/chainparams.cpp
+modified:   src/main.cpp
+modified:   src/main.h
+modified:   src/primitives/block.h
+modified:   src/qt/transactionrecord.h
+modified:   src/script/standard.h
+$ cdhome && patcd/patchv1.sh
+$ vi/nano patcd/coin.conf
+$ patcd/patchv2.sh
+$ patcd/install.sh && patcd/build.sh
+$ dcup
+$ alicesh
+
+root@eff1946ebdda:/# rt getinfo
+{
+    "version" : 100000,
+    "protocolversion" : 70002,
+    "walletversion" : 60000,
+    "balance" : 0.00000000,
+    "blocks" : 0,
+    "timeoffset" : 0,
+    "connections" : 2,
+    "proxy" : "",
+    "difficulty" : 0.00000000,
+    "testnet" : false,
+    "keypoololdest" : 1426932232,
+    "keypoolsize" : 101,
+    "paytxfee" : 0.00000000,
+    "relayfee" : 0.00001000,
+    "errors" : ""
+}
+
+root@eff1946ebdda:/# bitcoin-cli --version
+Bitcoin/Patcd/v150321 RPC client version v0.10.0.0-g047a898
+
+root@eff1946ebdda:/# rt setgenerate true 15
+[
+    "7759eccfd2021b8ced5d176ae6ab6f8d2edcf2458ea63dbe487a77a6c070ba5f",
+    "0e642e15343246941a67a16dfd6c5a75552595a79377b492c285a47d6f0864e8",
+    "755329408ff6a08e6336000be72eb99a00f1b1688a7a5962d384e36fb46ba193",
+    "31d0b970802980507efe64cb81eb4b0d0bdbf0fdc4ea8cf41706cf362982721a",
+    "55b4f1f41c496a65f8096793190bd59118516a5f4bb1ea0d75f5041d4ff439ef",
+    "3a941e753e3a59873be07eecb8922405c47e904afc8c25e72f60e751a99bd626",
+    "0793c8521a9b2d786bad1e994c3bde40fbb3c62d73318ac5172887aff39aabc6",
+    "7b0e3f9328c2f7d9a65ed529e519c5ec680aac48fff8c529f9eee8027e01cdee",
+    "7fb8d2915ccee8aff57df629b7062a072a338b2baa33ab37541c895bbea4df5f",
+    "14fb4682e351de663a095f230d4cc1dce6037dde61034d7b8422e3055aef18e1",
+    "330cdf22ab354032692aff9e21ec06cb55a2d356e9edd163046e9d14781c62df",
+    "204ed6e9507b30d28235a08fb35da0851ee2ae3a3bd6acadb91eb47edb8c2ab7",
+    "74fe3e2b60a1de1883353a083174f0ce0f7f7434abb7b609c6912917604319e8",
+    "2d5c0175a979b4a67a769a388d5367539177721501260065010314f4e11834ba",
+    "3271eca0dfef77fbca8531dc11d52ec2edca97c0041a257da3c7d9dd934213fb"
+]
+root@eff1946ebdda:/# rt getinfo
+{
+    "version" : 100000,
+    "protocolversion" : 70002,
+    "walletversion" : 60000,
+    "balance" : 1120.00000000,
+    "blocks" : 15,
+    "timeoffset" : 0,
+    "connections" : 2,
+    "proxy" : "",
+    "difficulty" : 0.00000000,
+    "testnet" : false,
+    "keypoololdest" : 1426932232,
+    "keypoolsize" : 101,
+    "paytxfee" : 0.00000000,
+    "relayfee" : 0.00001000,
+    "errors" : ""
+}
+
+//Y_SUBSIDY|60
+//Y_PREMINE_HEIGHT_1|1000
+//Y_COINBASE_MATURITY|12
+100+60*2
+
+root@eff1946ebdda:/# rt getnewaddress
+ygnFWS978mi96mUcSSWSadakys5v1Yvsec
+root@eff1946ebdda:/# rt dumpprivkey ygnFWS978mi96mUcSSWSadakys5v1Yvsec
+GvmVaRuPdnFf8pfbUdZZgy3HpaZKT8AaMZeS1Mc1T8M55c5FV62C
+
+root@eff1946ebdda:~# rt listaccounts
+{
+    "" : 1120.00000000
+}
+
+
+
+```
+
+
 Fri Mar 20 21:14:17 CST 2015
 
 build patch file

@@ -8,7 +8,7 @@ index ea349b1..c12b46f 100644
      if (argc<2 || mapArgs.count("-?") || mapArgs.count("-help") || mapArgs.count("-version")) {
 -        std::string strUsage = _("Bitcoin Core RPC client version") + " " + FormatFullVersion() + "\n";
 +        /** bitcoin-cli --version */
-+        std::string strUsage = _("Y_VERNAME RPC client version") + " " + FormatFullVersion() + "\n";
++        std::string strUsage = _("Bitcoin/Patcd/v150321 RPC client version") + " " + FormatFullVersion() + "\n";
          if (!mapArgs.count("-version")) {
              strUsage += "\n" + _("Usage:") + "\n" +
                    "  bitcoin-cli [options] <command> [params]  " + _("Send command to Bitcoin Core") + "\n" +
@@ -22,7 +22,7 @@ index c1be122..0c3cf58 100644
          // First part of help message is specific to this utility
 -        std::string strUsage = _("Bitcoin Core bitcoin-tx utility version") + " " + FormatFullVersion() + "\n\n" +
 +        /** bitcoin-tx --version */
-+        std::string strUsage = _("Y_VERNAME bitcoin-tx utility version") + " " + FormatFullVersion() + "\n\n" +
++        std::string strUsage = _("Bitcoin/Patcd/v150321 bitcoin-tx utility version") + " " + FormatFullVersion() + "\n\n" +
              _("Usage:") + "\n" +
                "  bitcoin-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded bitcoin transaction") + "\n" +
                "  bitcoin-tx [options] -create [commands]   " + _("Create hex-encoded bitcoin transaction") + "\n" +
@@ -36,7 +36,7 @@ index be7757b..f07219d 100644
      {
 -        std::string strUsage = _("Bitcoin Core Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
 +        /** bitcoind --version */
-+        std::string strUsage = _("Y_VERNAME Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
++        std::string strUsage = _("Bitcoin/Patcd/v150321 Daemon") + " " + _("version") + " " + FormatFullVersion() + "\n";
  
          if (mapArgs.count("-version"))
          {
@@ -82,11 +82,11 @@ index 0291fd9..18322c3 100644
 -        base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x35)(0x83)(0x94);
 +        /** List of address prefixes - Bitcoin  https://en.bitcoin.it/wiki/List_of_address_prefixes */
 +        // base58Prefixes[PUBKEY_ADDRESS] = list_of(111);
-+        base58Prefixes[PUBKEY_ADDRESS] = list_of(Y_B58_PUBKEY_ADDRESS);
++        base58Prefixes[PUBKEY_ADDRESS] = list_of(140);
 +        // base58Prefixes[SCRIPT_ADDRESS] = list_of(196);
-+        base58Prefixes[SCRIPT_ADDRESS] = list_of(Y_B58_SCRIPT_ADDRESS);
++        base58Prefixes[SCRIPT_ADDRESS] = list_of(125);
 +        // base58Prefixes[SECRET_KEY]     = list_of(239);
-+        base58Prefixes[SECRET_KEY]     = list_of(Y_B58_SECRET_KEY);
++        base58Prefixes[SECRET_KEY]     = list_of(107);
 +        // base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x35)(0x87)(0xCF);
 +        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x88)(0xB2)(0x1E); // xpub
 +        // base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x35)(0x83)(0x94);
@@ -117,13 +117,13 @@ index 0291fd9..18322c3 100644
 +        // pchMessageStart[1] = 0xbf;
 +        // pchMessageStart[2] = 0xb5;
 +        // pchMessageStart[3] = 0xda;
-+        pchMessageStart[0] = 0xY_PCH_0;
-+        pchMessageStart[1] = 0xY_PCH_1;
-+        pchMessageStart[2] = 0xY_PCH_2;
-+        pchMessageStart[3] = 0xY_PCH_3;
++        pchMessageStart[0] = 0xf5;
++        pchMessageStart[1] = 0xf9;
++        pchMessageStart[2] = 0xd0;
++        pchMessageStart[3] = 0xdc;
 +        /** Improvement to the Test Framework in the processing of test blocks https://github.com/bitcoin/bitcoin/pull/4688 */
 +        // nSubsidyHalvingInterval = 150;
-+        nSubsidyHalvingInterval = Y_SUBSIDY_HALVING_INTERVAL;
++        nSubsidyHalvingInterval = 250;
          nEnforceBlockUpgradeMajority = 750;
          nRejectBlockOutdatedMajority = 950;
          nToCheckBlockUpgradeMajority = 1000;
@@ -175,7 +175,7 @@ index 4a95bb1..ee0a0ef 100644
 -    CAmount nSubsidy = 50 * COIN;
 +    /** change nSubsidy's type from int64_t to CAmount  https://github.com/bitcoin/bitcoin/pull/5308 */
 +    // CAmount nSubsidy = 50 * COIN;
-+    CAmount nSubsidy = Y_SUBSIDY * COIN;
++    CAmount nSubsidy = 60 * COIN;
      int halvings = nHeight / Params().SubsidyHalvingInterval();
  
      // Force block reward to zero when right shift is undefined.
@@ -184,7 +184,7 @@ index 4a95bb1..ee0a0ef 100644
  
 +    /** premine */
 +    if(nHeight == 1)
-+        return Y_PREMINE_HEIGHT_1 * COIN;
++        return 1000 * COIN;
 +
      // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
      nSubsidy >>= halvings;
@@ -226,14 +226,14 @@ index a62bebc..71a3452 100644
  /** Default for -blockmaxsize and -blockminsize, which control the range of sizes the mining code will create **/
 -static const unsigned int DEFAULT_BLOCK_MAX_SIZE = 750000;
 +// static const unsigned int DEFAULT_BLOCK_MAX_SIZE = 750000;
-+static const unsigned int DEFAULT_BLOCK_MAX_SIZE = Y_DEFAULT_BLOCK_MAX_SIZE;
++static const unsigned int DEFAULT_BLOCK_MAX_SIZE = 750000;
  static const unsigned int DEFAULT_BLOCK_MIN_SIZE = 0;
  /** Default for -blockprioritysize, maximum space for zero/low-fee transactions **/
  static const unsigned int DEFAULT_BLOCK_PRIORITY_SIZE = 50000;
  /** The maximum size for transactions we're willing to relay/mine */
 -static const unsigned int MAX_STANDARD_TX_SIZE = 100000;
 +// static const unsigned int MAX_STANDARD_TX_SIZE = 100000;
-+static const unsigned int MAX_STANDARD_TX_SIZE = Y_MAX_STANDARD_TX_SIZE;
++static const unsigned int MAX_STANDARD_TX_SIZE = 100000;
  /** The maximum allowed number of signature check operations in a block (network rule) */
  static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
  /** Maximum number of signature check operations in an IsStandard() P2SH script */
@@ -243,7 +243,7 @@ index a62bebc..71a3452 100644
  /** Coinbase transaction outputs can only be spent after this number of new blocks (network rule) */
 -static const int COINBASE_MATURITY = 100;
 +//static const int COINBASE_MATURITY = 100;
-+static const int COINBASE_MATURITY = Y_COINBASE_MATURITY;
++static const int COINBASE_MATURITY = 12;
  /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
  static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
  /** Maximum number of script-checking threads allowed */
@@ -318,7 +318,7 @@ index 9c17902..8cbce67 100644
  /** The maximum allowed size for a serialized block, in bytes (network rule) */
 -static const unsigned int MAX_BLOCK_SIZE = 1000000;
 +// static const unsigned int MAX_BLOCK_SIZE = 1000000;
-+static const unsigned int MAX_BLOCK_SIZE = Y_MAX_BLOCK_SIZE;
++static const unsigned int MAX_BLOCK_SIZE = 5000000;
  
  /** Nodes collect new transactions into a block, hash them into a hash tree,
   * and scan through nonce values to make the block's hash satisfy proof-of-work
@@ -332,7 +332,7 @@ index e26453c..5bb9dfc 100644
      /** Number of confirmation recommended for accepting a transaction */
 -    static const int RecommendedNumConfirmations = 6;
 +    // static const int RecommendedNumConfirmations = 6;
-+    static const int RecommendedNumConfirmations = Y_RECOM_CONFIRMATIONS;
++    static const int RecommendedNumConfirmations = 3;
  
      TransactionRecord():
              hash(), time(0), type(Other), address(""), debit(0), credit(0), idx(0)
@@ -349,7 +349,7 @@ index 3fea6b9..deea100 100644
 +//Change the default maximum OP_RETURN size to 80 bytes by Flavien · Pull Request #5286 · bitcoin/bitcoin
 +// https://github.com/bitcoin/bitcoin/pull/5286
 +// static const unsigned int MAX_OP_RETURN_RELAY = 40;      //! bytes
-+static const unsigned int MAX_OP_RETURN_RELAY = Y_MAX_OP_RETURN_RELAY;      //! bytes
++static const unsigned int MAX_OP_RETURN_RELAY = 256;      //! bytes
  extern unsigned nMaxDatacarrierBytes;
  
  /**

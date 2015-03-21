@@ -14,6 +14,7 @@ SCRIPTPATH=$( cd "$(dirname "$0")" ; pwd -P )
 rm -rf ~/tmp/bitcoin
 cp -r ~/tmp/bitcoin-* ~/tmp/bitcoin
 cd ~/tmp/bitcoin
+patch -p1 < ${SCRIPTPATH}/patchfile.v2
 ./autogen.sh
 CONFIGFLAGS="-disable-tests --without-gui --enable-upnp-default --disable-ccache --disable-maintainer-mode --disable-dependency-tracking"
 ./configure --prefix=${SCRIPTPATH} --with-incompatible-bdb ${CONFIGFLAGS}
