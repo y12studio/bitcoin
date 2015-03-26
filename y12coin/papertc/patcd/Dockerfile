@@ -10,7 +10,15 @@ RUN mkdir -p /btc/data \
 ADD run /etc/service/bitcoind/
 RUN chmod +x /etc/service/bitcoind/run
 
+WORKDIR /patcd
+
 ADD bin/bitcoind bin/bitcoin-cli bin/bitcoin-tx /usr/bin/
+
+ADD pycoin.conf /patcd/
+
+RUN git clone https://github.com/y12studio/pycoin &&\
+    cat pycoin.conf | sed '/^\#/d' | xargs -i sed -i 's|{}|' pycoin/pycoin/networks.py &&\
+    cd pycoin && python setup.py install
 
 EXPOSE 12333 12332
 CMD ["/sbin/my_init"]

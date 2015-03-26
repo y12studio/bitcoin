@@ -1,3 +1,182 @@
+Thu Mar 26 20:21:02 CST 2015
+
+```
+$ source alias.sh
+$ vi/nano src
+$ cdhome
+$ cd patcd && ./patchv1.sh && ./patchv2.sh && ./install.sh && ./build.sh
+$ dcup
+$ alicesh
+root@fde3017808d5:/# rt getnetworkinfo
+{
+    "version" : 100000,
+    "subversion" : "/SatoshiPatcd:0.10.0/",
+    "protocolversion" : 70002,
+    "localservices" : "0000000000000001",
+    "timeoffset" : 0,
+    "connections" : 2,
+    "networks" : [
+        {
+            "name" : "ipv4",
+            "limited" : false,
+            "reachable" : false,
+            "proxy" : ""
+        },
+        {
+            "name" : "ipv6",
+            "limited" : false,
+            "reachable" : false,
+            "proxy" : ""
+        },
+        {
+            "name" : "onion",
+            "limited" : false,
+            "reachable" : false,
+            "proxy" : ""
+        }
+    ],
+    "relayfee" : 0.00001000,
+    "localaddresses" : [
+    ]
+}
+
+root@ec084a10bbe8:/patcd# ku -h
+usage: ku [-h] [-w] [-W] [-a] [-u] [-P] [-j] [-s SUBKEY]
+          [-n {PTD,BTC,XTN,LTC,XLT,VIA,TVI,DOGE,BC,DRK,tDRK,MEC,MYR,UNO,JBS,MZC,RIC}]
+          [--override-network {PTD,BTC,XTN,LTC,XLT,VIA,TVI,DOGE,BC,DRK,tDRK,MEC,MYR,UNO,JBS,MZC,RIC}]
+          item [item ...]
+
+Crypto coin utility ku ("key utility") to show information about Bitcoin or
+other cryptocoin data structures.
+
+positional arguments:
+  item                  a BIP0032 wallet key string; a WIF; a bitcoin address;
+                        an SEC (ie. a 66 hex chars starting with 02, 03 or a
+                        130 hex chars starting with 04); the literal string
+                        "create" to create a new wallet key using strong
+                        entropy sources; P:wallet passphrase (NOT
+                        RECOMMENDED); H:wallet passphrase in hex (NOT
+                        RECOMMENDED); secret_exponent (in decimal or hex); x,y
+                        where x,y form a public pair (y is a number or one of
+                        the strings "even" or "odd"); hash160 (as 40 hex
+                        characters)
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -w, --wallet          show just Bitcoin wallet key
+  -W, --wif             show just Bitcoin WIF
+  -a, --address         show just Bitcoin address
+  -u, --uncompressed    show output in uncompressed form
+  -P, --public          only show public version of wallet keys
+  -j, --json            output as JSON
+  -s SUBKEY, --subkey SUBKEY
+                        subkey path (example: 0H/2/15-20)
+  -n {PTD,BTC,XTN,LTC,XLT,VIA,TVI,DOGE,BC,DRK,tDRK,MEC,MYR,UNO,JBS,MZC,RIC}, --network {PTD,BTC,XTN,LTC,XLT,VIA,TVI,DOGE,BC,DRK,tDRK,MEC,MYR,UNO,JBS,MZC,RIC}
+                        specify network (default: BTC = Bitcoin)
+  --override-network {PTD,BTC,XTN,LTC,XLT,VIA,TVI,DOGE,BC,DRK,tDRK,MEC,MYR,UNO,JBS,MZC,RIC}
+                        override detected network type
+
+Known networks codes: PTD (Patcd mainnet), BTC (Bitcoin mainnet), XTN (Bitcoin
+testnet3), LTC (Litecoin mainnet), XLT (Litecoin testnet), VIA (Viacoin
+mainnet), TVI (Viacoin testnet), DOGE (Dogecoin mainnet), BC (Blackcoin
+mainnet), DRK (Darkcoin mainnet), tDRK (Darkcoin testnet), MEC (Megacoin
+mainnet), MYR (Myriadcoin mainnet), UNO (Unobtanium mainnet), JBS (Jumbucks
+mainnet), MZC (Mazacoin mainnet), RIC (Riecoin mainnet)
+
+root@aef84a4469bb:/patcd# ku -n PTD create
+
+input                      : create
+network                    : Patcd mainnet
+netcode                    : PTD
+wallet key                 : xprv9s21ZrQH143K3aMYAYjJCQNMphaugq6rgvKdz6YJvsaB8dUS3FyPVCEGqpWgun\
+                               sgjRbkERYspDVUpKnj5wQRRakmvnFCZQTWpPdR3bHvJr9
+public version             : xpub661MyMwAqRbcG4S1GaGJZYK6NjRQ6Hpi49FEnUwvVD7A1RoaaoHe2zYkh4Heoc\
+                               v6BuwbhC2jNFc3RKkg7ZXcoALzt6ZxSthTpP8eA261WRu
+tree depth                 : 0
+fingerprint                : 5520e047
+parent f'print             : 00000000
+child index                : 0
+chain code                 : 9863e79288a68a0fa6f8ed522551129b7994619f0e1773cc4bdbb03da12dd808
+private key                : yes
+secret exponent            : 94598197286997182882913828729041145067164255403105227081908076462644312927812
+ hex                       : d124aea8356ebb90679f188507bab13d94b12d12be158b3cf61e7b59832bee44
+wif                        : Gx41v8xXVXCCScg6SF55Lf3v7QAXAUaXBJ23abjnMykpscUBVoz1
+ uncompressed              : 4camAKZyJLXdaSkkNaYjftfiwTzthD93m28wWN1dZPpzX9FW9EB
+public pair x              : 19827663998100767690797009088710332879372605993821048514051075564243806741372
+public pair y              : 9440145612143168755389028921873953622883249182490139025550645649128993729508
+ x as hex                  : 2bd60f648e20e07994c21690fd28c680f0fab24b02e55b769ee7074153fe637c
+ y as hex                  : 14deeeddadf14be5fe3a346cd7f65467663d4f5c62d90b9338bdead0a0ae2be4
+y parity                   : even
+key pair as sec            : 022bd60f648e20e07994c21690fd28c680f0fab24b02e55b769ee7074153fe637c
+ uncompressed              : 042bd60f648e20e07994c21690fd28c680f0fab24b02e55b769ee7074153fe637c\
+                               14deeeddadf14be5fe3a346cd7f65467663d4f5c62d90b9338bdead0a0ae2be4
+hash160                    : 5520e04796502c6ff35adde82c4e5b9971c73b2c
+ uncompressed              : a2451736df7c4353ffa6aab6a89336afcb038d95
+Patcd address              : yU5ZfnAmjD2Dt9wtYH27ZfhrRZiMnGcQM8
+Patcd address uncompressed : yb7T5nSWa8d7WLLxFk5P1MjuD22uFhoGDb
+
+
+root@aef84a4469bb:/patcd# ku -n PTD P:foo
+
+input                      : P:foo
+network                    : Patcd mainnet
+netcode                    : PTD
+wallet key                 : xprv9s21ZrQH143K31AgNK5pyVvW23gHnkBq2wh5aEk6g1s496M8ZMjxncCKZKgb5j\
+                               ZoY5eSJMJ2Vbyvi2hbmQnCuHBujZ2WXGTux1X2k9Krdtq
+public version             : xpub661MyMwAqRbcFVF9ULcqLdsEa5WnCCugQAcgNd9iEMQ31tgH6u4DLQWoQayvtS\
+                               VYFvXz2vPPpbXE1qpjoUFidhjFj82pVShWu9curWmb2zy
+tree depth                 : 0
+fingerprint                : 5d353a2e
+parent f'print             : 00000000
+child index                : 0
+chain code                 : 5eeb1023fd6dd1ae52a005ce0e73420821e1d90e08be980a85e9111fd7646bbc
+private key                : yes
+secret exponent            : 65825730547097305716057160437970790220123864299761908948746835886007793998275
+ hex                       : 91880b0e3017ba586b735fe7d04f1790f3c46b818a2151fb2def5f14dd2fd9c3
+wif                        : GuvN2tXqZAFZNJZtJHEj6VrfBBiPqVyuQZ1c7XWdfo4w1fd2mhab
+ uncompressed              : 4c6kHHfFdHbZi5S86GuxJZNDjBar8N4q89cUtmyZKkyAyPuxENM
+public pair x              : 81821982719381104061777349269130419024493616650993589394553404347774393168191
+public pair y              : 58994218069605424278320703250689780154785099509277691723126325051200459038290
+ x as hex                  : b4e599dfa44555a4ed38bcfff0071d5af676a86abf123c5b4b4e8e67a0b0b13f
+ y as hex                  : 826d8b4d3010aea16ff4c1c1d3ae68541d9a04df54a2c48cc241c2983544de52
+y parity                   : even
+key pair as sec            : 02b4e599dfa44555a4ed38bcfff0071d5af676a86abf123c5b4b4e8e67a0b0b13f
+ uncompressed              : 04b4e599dfa44555a4ed38bcfff0071d5af676a86abf123c5b4b4e8e67a0b0b13f\
+                               826d8b4d3010aea16ff4c1c1d3ae68541d9a04df54a2c48cc241c2983544de52
+hash160                    : 5d353a2ecdb262477172852d57a3f11de0c19286
+ uncompressed              : e5bd3a7e6cb62b4c820e51200fb1c148d79e67da
+Patcd address              : yUpHTLdfrvMUHTUbfJDE1E69Thg96bL3rU
+Patcd address uncompressed : yhGCGxY2PSJ29NhvKRFSv8QqdpbWPYTria
+
+root@aef84a4469bb:/patcd# ku -n PTD P:foo -P -j
+{
+   "PTD_address": "yUpHTLdfrvMUHTUbfJDE1E69Thg96bL3rU",
+   "PTD_address_uncompressed": "yhGCGxY2PSJ29NhvKRFSv8QqdpbWPYTria",
+   "address": "yUpHTLdfrvMUHTUbfJDE1E69Thg96bL3rU",
+   "address_uncompressed": "yhGCGxY2PSJ29NhvKRFSv8QqdpbWPYTria",
+   "chain_code": "5eeb1023fd6dd1ae52a005ce0e73420821e1d90e08be980a85e9111fd7646bbc",
+   "child_index": "0",
+   "fingerprint": "5d353a2e",
+   "hash160": "5d353a2ecdb262477172852d57a3f11de0c19286",
+   "hash160_uncompressed": "e5bd3a7e6cb62b4c820e51200fb1c148d79e67da",
+   "input": "P:foo",
+   "key_pair_as_sec": "02b4e599dfa44555a4ed38bcfff0071d5af676a86abf123c5b4b4e8e67a0b0b13f",
+   "key_pair_as_sec_uncompressed": "04b4e599dfa44555a4ed38bcfff0071d5af676a86abf123c5b4b4e8e67a0b0b13f826d8b4d3010aea16ff4c1c1d3ae68541d9a04df54a2c48cc241c2983544de52",
+   "netcode": "PTD",
+   "network": "Patcd mainnet",
+   "parent_fingerprint": "00000000",
+   "private_key": "no",
+   "public_pair_x": "81821982719381104061777349269130419024493616650993589394553404347774393168191",
+   "public_pair_x_hex": "b4e599dfa44555a4ed38bcfff0071d5af676a86abf123c5b4b4e8e67a0b0b13f",
+   "public_pair_y": "58994218069605424278320703250689780154785099509277691723126325051200459038290",
+   "public_pair_y_hex": "826d8b4d3010aea16ff4c1c1d3ae68541d9a04df54a2c48cc241c2983544de52",
+   "tree_depth": "0",
+   "wallet_key": "xpub661MyMwAqRbcFVF9ULcqLdsEa5WnCCugQAcgNd9iEMQ31tgH6u4DLQWoQayvtSVYFvXz2vPPpbXE1qpjoUFidhjFj82pVShWu9curWmb2zy",
+   "y_parity": "even"
+}
+
+```
+
 Sat Mar 21 14:45:34 CST 2015
 
 new patch file

@@ -155,6 +155,31 @@ index 0291fd9..18322c3 100644
      {
          // UnitTest share the same checkpoints as MAIN
          return data;
+diff --git a/src/clientversion.cpp b/src/clientversion.cpp
+index b3414fd..3ca20f5 100644
+--- a/src/clientversion.cpp
++++ b/src/clientversion.cpp
+@@ -13,7 +13,8 @@
+  * for both bitcoind and bitcoin-core, to make it harder for attackers to
+  * target servers or GUI users specifically.
+  */
+-const std::string CLIENT_NAME("Satoshi");
++// const std::string CLIENT_NAME("Satoshi");
++const std::string CLIENT_NAME("Y_CLIENT_NAME");
+ 
+ /**
+  * Client version number
+@@ -91,8 +92,8 @@ std::string FormatFullVersion()
+     return CLIENT_BUILD;
+ }
+ 
+-/** 
+- * Format the subversion field according to BIP 14 spec (https://github.com/bitcoin/bips/blob/master/bip-0014.mediawiki) 
++/**
++ * Format the subversion field according to BIP 14 spec (https://github.com/bitcoin/bips/blob/master/bip-0014.mediawiki)
+  */
+ std::string FormatSubVersion(const std::string& name, int nClientVersion, const std::vector<std::string>& comments)
+ {
 diff --git a/src/main.cpp b/src/main.cpp
 index 4a95bb1..ee0a0ef 100644
 --- a/src/main.cpp
