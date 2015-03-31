@@ -1,3 +1,58 @@
+Tue Mar 31 22:31:45 CST 2015
+
+```
+$ source alias.sh
+$ dc build pycoin
+$ dc run pycoin ku -h
+$ pku -h
+usage: ku [-h] [-w] [-W] [-a] [-u] [-P] [-j] [-s SUBKEY]
+          [-n {RTCD,BTC,XTN,LTC,XLT,VIA,TVI,DOGE,BC,DRK,tDRK,MEC,MYR,UNO,JBS,MZC,RIC}]
+          [--override-network {RTCD,BTC,XTN,LTC,XLT,VIA,TVI,DOGE,BC,DRK,tDRK,MEC,MYR,UNO,JBS,MZC,RIC}]
+          item [item ...]
+
+Known networks codes: RTCD (Redtcd mainnet), BTC (Bitcoin mainnet), XTN
+(Bitcoin testnet3), LTC (Litecoin mainnet), XLT (Litecoin testnet), VIA
+(Viacoin mainnet), TVI (Viacoin testnet), DOGE (Dogecoin mainnet), BC
+(Blackcoin mainnet), DRK (Darkcoin mainnet), tDRK (Darkcoin testnet), MEC
+(Megacoin mainnet), MYR (Myriadcoin mainnet), UNO (Unobtanium mainnet), JBS
+(Jumbucks mainnet), MZC (Mazacoin mainnet), RIC (Riecoin mainnet)
+
+$ pku -n RTCD P:foo123
+
+
+input                       : P:foo123
+network                     : Redtcd mainnet
+netcode                     : RTCD
+wallet key                  : xprv9s21ZrQH143K2wxuiw6TsooaMS1UuSKEG2ecodKstjguqw88kHC7PA2Fg2wNrb\
+                                VEUUrwmNwxUtpbLfvMX5PxPy8QaEZkpD5Wytq12c4N5fP
+public version              : xpub661MyMwAqRbcFS3NpxdUEwkJuTqyJu35dFaDc1jVT5DtijTHHpWMvxLjXGRwmW\
+                                GqxxVo5Nsykf39GytyzRiD3jQcGrV54M6rQaW8TFYLx7C
+tree depth                  : 0
+fingerprint                 : bcb3964b
+parent f'print              : 00000000
+child index                 : 0
+chain code                  : 595f1d3f06d424ecb72f800678bc60fe5b1b3e0d06684b4ec8dbafa3a6ecec62
+private key                 : yes
+secret exponent             : 113203460196365794417836069566467237164431446589835561036208489629595376061019
+ hex                        : fa46e34c6503a5f3785506efb3a458a8572946b0b19862b78d3dea08f0a88a5b
+wif                         : GyRyW7Cv5XRc2gaHhQAi2wQTLFw54JjkzYxMFvVatk82ypSmbHDt
+ uncompressed               : 4ctss6V5KhRc8BKsTNZZQYp15N4BtVwYiayVc6mzXJURU1ssxEw
+public pair x               : 21593479522770990042883530725579673792864070234553897807505144510899602684277
+public pair y               : 80351513151441525828983835173980861829332894676927270796314477149424804817608
+ x as hex                   : 2fbd79ee9b261e9f74660206b7193e7d23b369f35c871222e9cfbe188ca17975
+ y as hex                   : b1a55843fbd28ae6ba4526e836767042b75e355542ded8696774fc64226deac8
+y parity                    : even
+key pair as sec             : 022fbd79ee9b261e9f74660206b7193e7d23b369f35c871222e9cfbe188ca17975
+ uncompressed               : 042fbd79ee9b261e9f74660206b7193e7d23b369f35c871222e9cfbe188ca17975\
+                                b1a55843fbd28ae6ba4526e836767042b75e355542ded8696774fc64226deac8
+hash160                     : bcb3964bd40a74a4c0b0b2eef7b25b523e246973
+ uncompressed               : bd2b236ed1232fd12ca91bdb993a52e804578b12
+Redtcd address              : ydXD2CPpvZ7rEJ9mozneQHDVRU5K965YGU
+Redtcd address uncompressed : ydZgEmWfnMJHeU9B5fiVhEAyWCCbzitCAV
+
+```
+
+
 Tue Mar 31 16:55:09 CST 2015
 
 ```

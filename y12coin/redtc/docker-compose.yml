@@ -40,3 +40,7 @@ seedb:
     expose:
         - "12333"
         - "12332"
+
+pycoin:
+    build: pycoin
+    command: /bin/true
