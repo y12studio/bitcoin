@@ -1,0 +1,42 @@
+alice:
+    image: redtcd
+    command: >
+        /usr/bin/coind -regtest
+        -conf=/btc/coin.conf -datadir=/btc/data
+        -addnode=seeda:12333 -addnode=seedb:12333
+    expose:
+        - "12333"
+        - "12332"
+    links:
+        - seeda
+        - seedb
+
+bob:
+    image: redtcd
+    command: >
+        /usr/bin/coind -regtest
+        -conf=/btc/coin.conf -datadir=/btc/data
+        -addnode=seeda:12333
+    expose:
+        - "12333"
+        - "12332"
+    links:
+        - seeda
+
+seeda:
+    image: redtcd
+    command: >
+        /usr/bin/coind -regtest -txindex -disablewallet
+        -conf=/btc/coin.conf -datadir=/btc/data
+    expose:
+        - "12333"
+        - "12332"
+
+seedb:
+    image: redtcd
+    command: >
+        /usr/bin/coind -regtest -txindex -disablewallet
+        -conf=/btc/coin.conf -datadir=/btc/data
+    expose:
+        - "12333"
+        - "12332"
