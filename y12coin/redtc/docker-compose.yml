@@ -44,3 +44,7 @@ seedb:
 pycoin:
     build: pycoin
     command: /bin/true
+
+bitcore:
+    build: bitcore
+    command: /bin/true
