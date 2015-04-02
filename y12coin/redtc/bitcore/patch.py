@@ -4,7 +4,7 @@ import sys
 import yaml
 
 p = open('coin.js.tpl','r').read()
-doc = yaml.load(open('pycoin.yml', 'r'))
+doc = yaml.load(open('bcoin.yml', 'r'))
 for k in doc:
     p = p.replace(k,str(doc[k]))
 p2 = open("coin.js", "wb")

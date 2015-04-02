@@ -5,4 +5,4 @@ WORKDIR /app
 
 RUN npm install bitcore bitcore-mnemonic bitcore-p2p
 
-ADD coin.js mnemonic.js /app/
+ADD coin.js bcoin.js /app/

@@ -8,8 +8,8 @@ Networks.add({
   scripthash: 0xYP_HEX_SCRIPT_ADDRESS,
   xpubkey: 0xYP_HEX_EXT_PUBLIC_KEY,
   xprivkey: 0xYP_HEX_EXT_SECRET_KEY,
-  networkMagic: 0xfabfb5da,
-  port: 18333,
+  networkMagic: 0xY_PCH_0Y_PCH_1Y_PCH_2Y_PCH_3,
+  port: 8333,
   dnsSeeds: [
   ],
 });

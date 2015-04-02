@@ -8,8 +8,8 @@ Networks.add({
   scripthash: 0x7d,
   xpubkey: 0x0488B21E,
   xprivkey: 0x0488ADE4,
-  networkMagic: 0xfabfb5da,
-  port: 18333,
+  networkMagic: 0xf5f9d0dc,
+  port: 8333,
   dnsSeeds: [
   ],
 });

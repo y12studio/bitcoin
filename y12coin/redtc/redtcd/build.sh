@@ -6,7 +6,7 @@ set -x
 SCRIPTPATH=$( cd "$(dirname "$0")" ; pwd -P )
 DIRBUILD=~/tmp/bitcoin
 
-cd ${SCRIPTPATH} && python patch.py && python build-pycoin-yml.py
+cd ${SCRIPTPATH} && python patch.py && python build-ext-yml.py
 
 # apt-get -y update
 # apt-get -yq install automake autoconf libtool pkg-config libboost-all-dev libdb5.1++-dev
