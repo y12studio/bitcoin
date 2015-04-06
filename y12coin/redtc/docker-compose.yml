@@ -3,10 +3,13 @@ alice:
     command: >
         /usr/bin/coind -regtest
         -conf=/btc/coin.conf -datadir=/btc/data
-        -addnode=seeda:12333 -addnode=seedb:12333
+        -addnode=seeda:12333 -addnode=seedb:12333 -rpcallowip=172.17.1.0/24
     expose:
         - "12333"
         - "12332"
+    ports:
+        - "12333:12333"
+        - "12332:12332"
     links:
         - seeda
         - seedb
@@ -16,7 +19,7 @@ bob:
     command: >
         /usr/bin/coind -regtest
         -conf=/btc/coin.conf -datadir=/btc/data
-        -addnode=seeda:12333
+        -addnode=seeda:12333 -rpcallowip=172.17.1.0/24
     expose:
         - "12333"
         - "12332"
@@ -28,6 +31,7 @@ seeda:
     command: >
         /usr/bin/coind -regtest -txindex -disablewallet
         -conf=/btc/coin.conf -datadir=/btc/data
+        -rpcallowip=172.17.1.0/24
     expose:
         - "12333"
         - "12332"
@@ -37,6 +41,7 @@ seedb:
     command: >
         /usr/bin/coind -regtest -txindex -disablewallet
         -conf=/btc/coin.conf -datadir=/btc/data
+        -rpcallowip=172.17.1.0/24
     expose:
         - "12333"
         - "12332"
@@ -48,3 +53,14 @@ pycoin:
 bitcore:
     build: bitcore
     command: /bin/true
+
+test:
+    hostname: test
+    image: y12docker/apbase:1504
+    command: nosetests -v /app/test_http.py
+    volumes:
+        - testapp/:/app
+    links:
+        - alice
+        - bob
+        - seeda

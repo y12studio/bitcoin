@@ -1,3 +1,38 @@
+Mon Apr  6 20:48:34 CST 2015
+```
+$ dcup
+
+alice uses an image, skipping
+test uses an image, skipping
+Recreating redtc_seeda_1...
+Recreating redtc_seedb_1...
+Recreating redtc_bitcore_1...
+Recreating redtc_bob_1...
+Recreating redtc_pycoin_1...
+Recreating redtc_alice_1...
+Recreating redtc_test_1...
+Attaching to redtc_test_1, redtc_alice_1, redtc_pycoin_1, redtc_bob_1, redtc_bitcore_1, redtc_seedb_1, redtc_seeda_1
+test_1    | test_http.TestWebRequest.test_alice ... ok
+test_1    | test_http.TestWebRequest.test_bob ... ok
+test_1    | test_http.TestWebRequest.test_seeda ... ok
+test_1    |
+test_1    | ----------------------------------------------------------------------
+test_1    | Ran 3 tests in 3.041s
+test_1    |
+test_1    | OK
+redtc_test_1 exited with code 0
+```
+
+
+Thu Apr  2 18:45:40 CST 2015
+
+```
+$ docker images | grep redtc
+redtc_bitcore       latest              d7b56852bf26        20 minutes ago      29.49 MB
+redtc_pycoin        latest              d8cb0a2ed801        44 hours ago        69.38 MB
+redtcd              latest              04a21ebe5e4e        2 days ago          17.56 MB
+```
+
 Tue Mar 31 22:31:45 CST 2015
 
 ```
